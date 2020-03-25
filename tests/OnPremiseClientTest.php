@@ -12,7 +12,16 @@ class OnPremiseClientTest extends TestCase {
     private $client = null;
 
     public function setUp() {
-        $this->client = new OnPremiseClient();
+        $this->client = new OnPremiseClient([
+            'siteUrl' => 'https://edossier-test.mob.ch/',
+            'client' => [
+                'verify' => true,
+                'curl' => [
+                    CURLOPT_HTTPAUTH => CURLAUTH_NTLM,
+                    CURLOPT_USERPWD => 'gps\\ed_test_service:pZl=mG,jtrY=.OvI=!+a'
+                ]
+            ]
+        ]);
     }
 
     public function testCreateFolder()

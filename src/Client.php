@@ -265,9 +265,7 @@ class Client
 		// Update the folder path
 		$folderPath = implode('/', $segments);
 
-		$this->folderPath = $this->folderPath.'/'.$folderPath;
-
-		$requestUrl = $this->siteUrl.'/sites/'.$this->siteName.'/_api/Web/GetFolderByServerRelativeUrl(\''.$this->folderPath.'\')/Files/add(url=\''.$path.'\', overwrite=true)';
+		$requestUrl = $this->siteUrl.'/sites/'.$this->siteName.'/_api/Web/GetFolderByServerRelativeUrl(\''. $this->folderPath.'/'.$folderPath .'\')/Files/add(url=\''.$path.'\', overwrite=true)';
 
 		$options = [
 			'headers' => $this->requestHeaders,

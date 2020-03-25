@@ -241,9 +241,7 @@ class OnPremiseClient extends Client {
         // Update the folder path
         $folderPath = implode('/', $segments);
 
-        $this->folderPath = $this->folderPath.'/'.$folderPath;
-
-        $action = 'GetFolderByServerRelativeUrl(\''.$this->folderPath.'\')/Files/add(url=\''.$path.'\',overwrite=true)';
+        $action = 'GetFolderByServerRelativeUrl(\''. $this->folderPath.'/'.$folderPath .'\')/Files/add(url=\''.$path.'\',overwrite=true)';
 
         $options = [
             'headers' => $this->requestHeaders,
