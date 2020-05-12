@@ -305,9 +305,9 @@ class OnPremiseClient extends Client {
 
         // If plain/text, its a folder
         if (substr($mimeType['mimetype'], 0, 4) === 'text') {
-            $requestUrl = 'GetFolderByServerRelativeUrl(\''.$this->folderPath.$path.'\')';
+            $requestUrl = 'GetFolderByServerRelativeUrl(\''. addcslashes($this->folderPath.$path, "'") .'\')';
         } else {
-            $requestUrl = 'GetFileByServerRelativeUrl(\''.$this->folderPath.$path.'\')';
+            $requestUrl = 'GetFileByServerRelativeUrl(\''. addcslashes($this->folderPath.$path, "'") .'\')';
         }
 
         $options = [
