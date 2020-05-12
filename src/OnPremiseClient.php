@@ -213,7 +213,7 @@ class OnPremiseClient extends Client {
 
         $response = $this->send('POST', $action, $options);
 
-        return $response->getStatusCode() === 200 ? true : false;
+        return $response->getStatusCode() === 200;
     }
 
     /**
