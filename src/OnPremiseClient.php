@@ -300,6 +300,32 @@ class OnPremiseClient extends Client {
         return $digest ?? $this->requestHeaders['X-RequestDigest'];
     }
 
+    public function getMetadata(string $path, array $mimeType): array {
+        $path = $this->normalizePath($path);
+
+        // If plain/text, its a folder
+        if (substr($mimeType['mimetype'], 0, 4) === 'text') {
+            $requestUrl = 'GetFolderByServerRelativeUrl(\''.$this->folderPath.$path.'\')';
+        } else {
+            $requestUrl = 'GetFileByServerRelativeUrl(\''.$this->folderPath.$path.'\')';
+        }
+
+        $options = [
+            'headers' => $this->requestHeaders,
+        ];
+
+        $response = $this->send('GET', $requestUrl, $options);
+
+        $metadata = json_decode($response->getBody())->d ?? [];
+
+        // Making sure we convert the object to an array
+        if (!is_array($metadata)) {
+            $metadata = json_decode(json_encode($metadata), true);
+        }
+
+        return $metadata;
+    }
+
     private function send(string $method, string $action, array $options)
     {
         try {
